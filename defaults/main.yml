@@ -1,0 +1,4 @@
+---
+lighthouse_archive_url: "https://github.com/VKCOM/lighthouse/archive/refs/heads/master.zip"
+lighthouse_install_dir: "/var/www/lighthouse"
+nginx_port: 80

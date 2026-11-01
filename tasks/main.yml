@@ -1,0 +1,28 @@
+---
+- name: Install Nginx
+  ansible.builtin.apt:
+    name: nginx
+    state: present
+    update_cache: true
+
+- name: Download LightHouse
+  ansible.builtin.get_url:
+    url: "{{ lighthouse_archive_url }}"
+    dest: "/tmp/lighthouse.zip"
+
+- name: Unpack LightHouse
+  ansible.builtin.unarchive:
+    src: "/tmp/lighthouse.zip"
+    dest: "/var/www/"
+    remote_src: true
+
+- name: Configure Nginx for LightHouse
+  ansible.builtin.template:
+    src: nginx.conf.j2
+    dest: /etc/nginx/sites-available/default
+    mode: '0644'
+
+- name: Restart Nginx
+  ansible.builtin.service:
+    name: nginx
+    state: restarted

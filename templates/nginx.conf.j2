@@ -1,0 +1,8 @@
+server {
+    listen {{ nginx_port }} default_server;
+    root /var/www/lighthouse-master;
+    index index.html;
+    location / {
+        try_files $uri $uri/ =404;
+    }
+}
