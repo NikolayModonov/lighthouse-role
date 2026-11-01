@@ -5,9 +5,15 @@
     state: present
     update_cache: true
 
-- name: Download LightHouse
+- name: Download LightHouse on controller
   ansible.builtin.get_url:
     url: "{{ lighthouse_archive_url }}"
+    dest: "/tmp/lighthouse.zip"
+  delegate_to: localhost
+
+- name: Copy LightHouse to target
+  ansible.builtin.copy:
+    src: "/tmp/lighthouse.zip"
     dest: "/tmp/lighthouse.zip"
 
 - name: Unpack LightHouse
